@@ -1,0 +1,25 @@
+{
+  "name": "snahider-svnserver",
+  "version": "0.1.0",
+  "author": "Angel Nunez <snahider@gmail.com>",
+  "summary": "Manage the a SVN Server",
+  "license": "Licensed under (Apache 2.0)",
+  "source": "https://github.com/snahider/puppet-svnserver",
+  "project_page": "(https://github.com/snahider/puppet-svnserver)",
+  "issues_url": "https://github.com/snahider/puppet-svnserver/issues",
+  "tags": [
+    "svn",
+    "subversion"
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [
+        "14.04"
+      ]
+    }
+  ],
+  "dependencies": [
+    {"name":"puppetlabs/apache","version_requirement":">= 1.6.0"}
+  ]
+}
