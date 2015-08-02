@@ -1,5 +1,5 @@
 class svnserver::repositories{
-	if $svnserver::default_repository_name{
-		svnserver::repository{$svnserver::default_repository_name:}
+	if $::svnserver::defaultrepository_name{
+		svnserver::repository{$::svnserver::defaultrepository_name:}
 	}
 }

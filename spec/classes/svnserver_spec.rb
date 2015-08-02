@@ -19,7 +19,7 @@ describe 'svnserver' do
 	context 'Should create a default repository when default_repository_name => NAME' do
 	    let :params do
 		{
-			:default_repository_name => 'repo',
+			:defaultrepository_name => 'repo',
 		}
 	    end
 		it{ should contain_svnserver__repository('repo')}

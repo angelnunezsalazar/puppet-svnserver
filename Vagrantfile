@@ -8,13 +8,20 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box_url = "https://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-i386-vagrant-disk1.box"
   config.vm.network "forwarded_port", guest: 80, host: 8585 #Subversion
   
+  config.vm.synced_folder "./", "/etc/puppet/modules/svnserver"
+
   config.vm.provider :virtualbox do |vb|
 	  vb.name = "vagrant-svnserver"
   end
   
-  #config.vm.provision :puppet do |puppet|
-	#  puppet.manifests_path = "provisioning/manifests"
-  #  puppet.manifest_file = "init.pp"
-	#	puppet.module_path = [ 'provisioning/modules', 'provisioning/modules-vendor' ]
-  #end
+  # This is a Vagrant-local hack to make sure we have properly udpated apt
+      # caches since AWS machines are definitely going to have stale ones
+  config.vm.provision 'shell',
+        :inline => 'if [ ! -f "/apt-cached" ]; then apt-get update && touch /apt-cached; fi'
+
+  config.vm.provision :puppet do |puppet|
+	  puppet.manifests_path = "vagrant"
+    puppet.manifest_file = "init.pp"
+		puppet.module_path = ['spec/fixtures/modules']
+  end
 end

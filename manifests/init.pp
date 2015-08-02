@@ -6,22 +6,26 @@
 #   (Optinal) The password to login to subversion server, not the OS password.
 #
 
-#TODO: Usuario y password deberian ser obligatorios
-
+# TODO: default repo: deberia ser opcional el nombre
 class svnserver(
 	$svn_user  					= undef,
 	$svn_password				= undef,
-	$default_repository_name	= undef,
+	$defaultrepository_name		= undef,
 )inherits ::svnserver::params{
 
 	Exec { path => [ '/bin/', '/sbin/' , '/usr/bin/', '/usr/sbin/' ] }
-	
-	include svnserver::install
+
+		class{'apache':
+		default_mods => false
+	}
+
+	#include svnserver::apachemods
+	include svnserver::package
 	include svnserver::config
 	include svnserver::users
 	include svnserver::repositories
 
-	Class['svnserver::install']
+	Class['svnserver::package']
 	-> Class['svnserver::config']
 		-> Class['svnserver::users']
 			-> Class['svnserver::repositories']

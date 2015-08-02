@@ -13,11 +13,20 @@ class svnserver::config{
 		require => [Group['subversion']]
 	}
 
-	#Template needs the variable '$repositories_path'
-	file { '/etc/apache2/mods-enabled/dav_svn.conf':
-		ensure  => present,
+	apache::mod { 'authn_core':}
+	apache::mod { 'authn_file': }
+	apache::mod { 'authz_user':}
+	apache::mod { 'dav':}
+	apache::mod { 'dav_svn':}
+	apache::mod { 'auth_basic':}
+
+	# The apache module will automatically create a symlink in the mod_enable_dir
+	# the ordening is also set by the apache module (apache::mod)
+	# Template needs the variable '$repositories_path'
+	file {'dav_svn.conf':
+		ensure  => file,
+		path    => "${::apache::mod_dir}/dav_svn.conf",
 		content => template('svnserver/dav_svn.conf.erb'),
-		notify 	=> Class['Apache::Service'],
-		require => [Apache::Mod['dav_svn'],Apache::Mod['authn_core']]
 	}
 }
+
