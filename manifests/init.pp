@@ -1,12 +1,15 @@
 # svn_user
-#   (Optional) This module doesn't create the user. 
-#   The user should be managed outside this module
+#   (Optional)  If provided, the module adds this user to the subversion group.
+#   This module doesn't create the user. The user should be managed outside this module
 #
 # svn_password
-#   (Optinal) The password to login to subversion server, not the OS password.
+#   (Optional) The password of the svn_user to login to subversion server, not the OS password.
+#
+# defaultrepository_name
+#   (Optional) If provided, the module creates a new svn repository.
 #
 
-# TODO: default repo: deberia ser opcional el nombre
+
 class svnserver(
 	$svn_user  					= undef,
 	$svn_password				= undef,

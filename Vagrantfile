@@ -13,9 +13,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provider :virtualbox do |vb|
 	  vb.name = "vagrant-svnserver"
   end
-  
-  # This is a Vagrant-local hack to make sure we have properly udpated apt
-      # caches since AWS machines are definitely going to have stale ones
+
+  if Vagrant.has_plugin?("vagrant-cachier")
+    config.cache.scope = :box
+  end
+
+  # Make sure we have properly udpated apt
   config.vm.provision 'shell',
         :inline => 'if [ ! -f "/apt-cached" ]; then apt-get update && touch /apt-cached; fi'
 
