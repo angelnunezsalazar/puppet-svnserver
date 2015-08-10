@@ -1,7 +1,9 @@
 class svnserver::users{
-	if($::svnserver::svn_user and $::svnserver::svn_password){
-		svnserver::user{$::svnserver::svn_user:
-			password => $::svnserver::svn_password
+	$user = $::svnserver::defaultuser_username
+	$password = $::svnserver::defaultuser_password
+	if($user and $password){
+		svnserver::user{$user:
+			password => $password
 		}
 	}
 }

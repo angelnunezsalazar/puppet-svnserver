@@ -1,9 +1,9 @@
-# svn_user
+# defaultuser_username
 #   (Optional)  If provided, the module adds this user to the subversion group.
 #   This module doesn't create the user. The user should be managed outside this module
 #
-# svn_password
-#   (Optional) The password of the svn_user to login to subversion server, not the OS password.
+# defaultuser_password
+#   (Optional) The password of the 'defaultuser_username' to login to subversion server, not the OS password.
 #
 # defaultrepository_name
 #   (Optional) If provided, the module creates a new svn repository.
@@ -11,8 +11,8 @@
 
 
 class svnserver(
-	$svn_user  					= undef,
-	$svn_password				= undef,
+	$defaultuser_username  		= undef,
+	$defaultuser_password		= undef,
 	$defaultrepository_name		= undef,
 )inherits ::svnserver::params{
 

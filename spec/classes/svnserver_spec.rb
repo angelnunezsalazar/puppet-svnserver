@@ -6,11 +6,11 @@ describe 'svnserver' do
 	    it { should compile }
 	end
 
-	context 'Should add a user to subversion when svn_user => true' do
+	context 'Should add a user to subversion when defaultuser_username => true' do
 	    let :params do
 		{
-			:svn_user => 'user',
-			:svn_password => 'pass'
+			:defaultuser_username => 'user',
+			:defaultuser_password => 'pass'
 		}
 	    end
 		it{ should contain_svnserver__user('user').with_password('pass') }
